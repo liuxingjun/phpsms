@@ -30,7 +30,7 @@
 | [聚合数据](https://www.juhe.cn/)        | √ | × | √ | -- | ￥0.035/条 |
 | [阿里大鱼](https://www.alidayu.com/)    | √ | × | √ | -- | ￥0.045/条 |
 | [SendCloud](https://sendcloud.sohu.com/)    | √ | × | √ | -- | ￥0.048/条 |
-
+| [腾讯sms](https://www.qcloud.com/product/sms/)    | √ | √ | √ | -- | ￥0.037/条 |
 
 # 安装
 
