@@ -38,11 +38,11 @@ return [
          */
         'Qcloud' => [
             //用户唯一标识，必须
-            'appid' => 'your api key',
-            'appkey' => 'your appKey',
+            'appid'   => 'your api key',
+            'appkey'  => 'your appKey',
             'sendUrl' => 'https://yun.tim.qq.com/v3/tlssmssvr/sendsms',
             //短信模板标示符
-             'registTmpl' => 4902,
+             'registTmpl'      => 4902,
              'retrievePwdTmpl' => 3262,
         ],
 
