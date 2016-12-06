@@ -28,8 +28,7 @@ return [
      *
      */
     'agents' => [
-
-    	/*
+        /*
          * -----------------------------------
          * qcloud
          * 腾讯云
@@ -42,9 +41,9 @@ return [
             'appid' => 'your api key',
             'appkey' =>'your appKey',
             'sendUrl' => 'https://yun.tim.qq.com/v3/tlssmssvr/sendsms',
-	        //短信模板标示符
-	        // 'registTmpl' => 4902,
-	        // 'retrievePwdTmpl'=>3262,
+            //短信模板标示符
+             'registTmpl' => 4902,
+             'retrievePwdTmpl'=>3262,
         ],
 
         /*
