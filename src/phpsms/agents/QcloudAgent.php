@@ -11,12 +11,10 @@ namespace Toplan\PhpSms;
  */
 class QcloudAgent extends Agent
 {
-
     public function sendSms($to, $content, $tempId, array $data)
     {
         $this->sendTemplateSms($to, $tempId, $data);
     }
-
 
     public function sendContentSms($to, $content)
     {
@@ -24,6 +22,7 @@ class QcloudAgent extends Agent
         $params['content'] = $content;
         $this->request($params);
     }
+	
     public function sendTemplateSms($to, $tempId, array $data)
     {
         $params['to'] = $to;
@@ -31,10 +30,11 @@ class QcloudAgent extends Agent
         $params['tempdata'] = $data;
         $this->request($params);
     }
+	
     protected function request(array $params)
     {
         $randNum = rand(100000, 999999);
-        $sendUrl = $this->sendUrl . "?sdkappid=" . $this->appid . "&random=" . $randNum;
+        $sendUrl = $this->sendUrl . '?sdkappid=' . $this->appid . '&random=' . $randNum;
         if (isset($params['content'])) {
             $params = $this->createContentParams($params);
         } elseif (isset($params['tempId'])) {
@@ -43,6 +43,7 @@ class QcloudAgent extends Agent
         $result = $this->QcloudCurl($sendUrl, $params);
         $this->setResult($result);
     }
+	
     protected function createContentParams(array $params)
     {
         $tel = new \stdClass();
@@ -78,9 +79,8 @@ class QcloudAgent extends Agent
 
     public function voiceVerify($to, $code, $tempId, array $data)
     {
-
     }
-	
+
     protected function QcloudCurl($url, $optData)
     {
         $ch = curl_init();
@@ -101,10 +101,12 @@ class QcloudAgent extends Agent
 	    
         return compact('request', 'response');
     }
+
     protected function genSign($params)
     {
         //
     }
+
     protected function setResult($result)
     {
         if ($result['response']['result'] === '0') {
@@ -117,6 +119,7 @@ class QcloudAgent extends Agent
             $this->result(Agent::CODE, 0000);
         }
     }
+
     protected function genResponseName($method)
     {
     }
