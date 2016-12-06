@@ -20,21 +20,21 @@ class QcloudAgent extends Agent
 
     public function sendContentSms($to, $content)
     {
-        $params['to']=$to;
-        $params['content']=$content;
+        $params['to'] = $to;
+        $params['content'] = $content;
         $this->request($params);
     }
     public function sendTemplateSms($to, $tempId, array $data)
     {
         $params['to'] = $to;
-        $params['tempId']=(int)$tempId;
-        $params['tempdata']=$data;
+        $params['tempId'] = (int) $tempId;
+        $params['tempdata'] = $data;
         $this->request($params);
     }
     protected function request(array $params)
     {
         $randNum = rand(100000, 999999);
-        $sendUrl = $this->sendUrl."?sdkappid=".$this->appid."&random=".$randNum;
+        $sendUrl = $this->sendUrl . "?sdkappid=" . $this->appid . "&random=".$randNum;
         if (isset($params['content'])) {
             $params = $this->createContentParams($params);
         } elseif (isset($params['tempId'])) {
@@ -50,15 +50,16 @@ class QcloudAgent extends Agent
         $tel->phone = $params['to'];
         $jsondata = new \stdClass();
         $jsondata->tel = $tel;
-        $jsondata->type = "0";
+        $jsondata->type = '0';
         $jsondata->msg = $params['content'];
-        $jsondata->sig = md5($this->appkey.$params['to']);
-        $jsondata->extend = "";     // 根据需要添加，一般保持默认
-        $jsondata->ext = "";        // 根据需要添加，一般保持默认
+        $jsondata->sig = md5($this->appkey . $params['to']);
+        $jsondata->extend = '';     // 根据需要添加，一般保持默认
+        $jsondata->ext = '';        // 根据需要添加，一般保持默认
         $params =json_encode($jsondata);
         return $params;
     }
-	protected function createTemplateParams(array $params)
+	
+    protected function createTemplateParams(array $params)
     {
         $tel = new \stdClass();
         $tel->nationcode = '86';
@@ -71,7 +72,7 @@ class QcloudAgent extends Agent
         $jsondata->sig = md5($this->appkey.$params['to']);
         $jsondata->extend = "";     // 根据需要添加，一般保持默认
         $jsondata->ext = "";        // 根据需要添加，一般保持默认
-        $params =json_encode($jsondata);
+        $params = json_encode($jsondata);
         return $params;
     }
 
@@ -79,6 +80,7 @@ class QcloudAgent extends Agent
     {
 
     }
+	
     protected function QcloudCurl($url, $optData)
     {
         $ch = curl_init();
@@ -95,7 +97,7 @@ class QcloudAgent extends Agent
             $response = curl_getinfo($ch);
         }
         curl_close($ch);
-         $response=json_decode($response, true);
+         $response = json_decode($response, true);
         return compact('request', 'response');
     }
     protected function genSign($params)
@@ -104,7 +106,7 @@ class QcloudAgent extends Agent
     }
     protected function setResult($result)
     {
-        if ($result['response']['result']=='0') {
+        if ($result['response']['result'] == '0') {
             $this->result(Agent::SUCCESS, true);
             $this->result(Agent::INFO, $result['response']['ext']);
             $this->result(Agent::CODE, 1111);
