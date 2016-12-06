@@ -34,7 +34,7 @@ class QcloudAgent extends Agent
     protected function request(array $params)
     {
         $randNum = rand(100000, 999999);
-        $sendUrl = $this->sendUrl . "?sdkappid=" . $this->appid . "&random=".$randNum;
+        $sendUrl = $this->sendUrl . "?sdkappid=" . $this->appid . "&random=" . $randNum;
         if (isset($params['content'])) {
             $params = $this->createContentParams($params);
         } elseif (isset($params['tempId'])) {
@@ -55,7 +55,7 @@ class QcloudAgent extends Agent
         $jsondata->sig = md5($this->appkey . $params['to']);
         $jsondata->extend = '';     // 根据需要添加，一般保持默认
         $jsondata->ext = '';        // 根据需要添加，一般保持默认
-        $params =json_encode($jsondata);
+        $params = json_encode($jsondata);
         return $params;
     }
 	
@@ -67,11 +67,11 @@ class QcloudAgent extends Agent
         $jsondata = new \stdClass();
         $jsondata->tel = $tel;
         $jsondata->type = '0';
-        $jsondata->tpl_id=$params['tempId'];
-        $jsondata->params=[$params['tempdata']['code'],(string)$params['tempdata']['minutes']];
-        $jsondata->sig = md5($this->appkey.$params['to']);
-        $jsondata->extend = "";     // 根据需要添加，一般保持默认
-        $jsondata->ext = "";        // 根据需要添加，一般保持默认
+        $jsondata->tpl_id = $params['tempId'];
+        $jsondata->params = [$params['tempdata']['code'], (string) $params['tempdata']['minutes']];
+        $jsondata->sig = md5($this->appkey . $params['to']);
+        $jsondata->extend = '';     // 根据需要添加，一般保持默认
+        $jsondata->ext = '';        // 根据需要添加，一般保持默认
         $params = json_encode($jsondata);
         return $params;
     }
@@ -97,7 +97,8 @@ class QcloudAgent extends Agent
             $response = curl_getinfo($ch);
         }
         curl_close($ch);
-         $response = json_decode($response, true);
+        $response = json_decode($response, true);
+	    
         return compact('request', 'response');
     }
     protected function genSign($params)
@@ -106,7 +107,7 @@ class QcloudAgent extends Agent
     }
     protected function setResult($result)
     {
-        if ($result['response']['result'] == '0') {
+        if ($result['response']['result'] === '0') {
             $this->result(Agent::SUCCESS, true);
             $this->result(Agent::INFO, $result['response']['ext']);
             $this->result(Agent::CODE, 1111);
@@ -128,6 +129,4 @@ class QcloudAgent extends Agent
 
         return json_encode($data);
     }
-
-
 }
