@@ -44,6 +44,7 @@ return [
             //短信模板标示符
              'registTmpl' => 4902,
              'retrievePwdTmpl'=>3262,
+
         ],
 
         /*
