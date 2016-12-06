@@ -22,7 +22,7 @@ class QcloudAgent extends Agent
         $params['content'] = $content;
         $this->request($params);
     }
-	
+
     public function sendTemplateSms($to, $tempId, array $data)
     {
         $params['to'] = $to;
@@ -30,7 +30,7 @@ class QcloudAgent extends Agent
         $params['tempdata'] = $data;
         $this->request($params);
     }
-	
+
     protected function request(array $params)
     {
         $randNum = rand(100000, 999999);
@@ -43,7 +43,7 @@ class QcloudAgent extends Agent
         $result = $this->QcloudCurl($sendUrl, $params);
         $this->setResult($result);
     }
-	
+
     protected function createContentParams(array $params)
     {
         $tel = new \stdClass();
@@ -57,9 +57,10 @@ class QcloudAgent extends Agent
         $jsondata->extend = '';     // 根据需要添加，一般保持默认
         $jsondata->ext = '';        // 根据需要添加，一般保持默认
         $params = json_encode($jsondata);
+	
         return $params;
     }
-	
+
     protected function createTemplateParams(array $params)
     {
         $tel = new \stdClass();
@@ -74,6 +75,7 @@ class QcloudAgent extends Agent
         $jsondata->extend = '';     // 根据需要添加，一般保持默认
         $jsondata->ext = '';        // 根据需要添加，一般保持默认
         $params = json_encode($jsondata);
+	
         return $params;
     }
 
