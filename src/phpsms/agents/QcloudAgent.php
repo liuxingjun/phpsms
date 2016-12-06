@@ -57,7 +57,7 @@ class QcloudAgent extends Agent
         $jsondata->extend = '';     // 根据需要添加，一般保持默认
         $jsondata->ext = '';        // 根据需要添加，一般保持默认
         $params = json_encode($jsondata);
-	
+
         return $params;
     }
 
@@ -75,7 +75,7 @@ class QcloudAgent extends Agent
         $jsondata->extend = '';     // 根据需要添加，一般保持默认
         $jsondata->ext = '';        // 根据需要添加，一般保持默认
         $params = json_encode($jsondata);
-	
+
         return $params;
     }
 
@@ -100,7 +100,7 @@ class QcloudAgent extends Agent
         }
         curl_close($ch);
         $response = json_decode($response, true);
-	    
+
         return compact('request', 'response');
     }
 
